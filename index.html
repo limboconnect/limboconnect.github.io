@@ -162,7 +162,7 @@ footer{padding:40px 0 56px}
   <p class="lead">Ik bouw tools die een <strong>praktisch probleem</strong> oplossen: op het werk, voor bekenden en in huis. Van Android-apps en webapps tot automatiseringen in Home Assistant. Hieronder een overzicht van wat ik gemaakt heb en wat het doet.</p>
   <div class="stats">
     <div class="stat"><b>4</b>apps in gebruik</div>
-    <div class="stat"><b>4</b>Home Assistant-projecten</div>
+    <div class="stat"><b>6</b>Home Assistant-projecten</div>
     <div class="stat"><b>Android · Web</b>platforms</div>
   </div>
 </header>
@@ -377,6 +377,53 @@ footer{padding:40px 0 56px}
       </dl>
     </article>
 
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.5"/></svg>
+        </div>
+        <div>
+          <h3>Veilige toegang van buitenaf</h3>
+          <div class="platform">Netwerk · beveiliging</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Home Assistant is onderweg bereikbaar via een eigen domeinnaam met HTTPS, zonder de installatie zelf open te zetten naar internet.</p>
+        <ul>
+          <li>Reverse proxy op de NAS vangt al het verkeer op</li>
+          <li>Gratis certificaat van Let's Encrypt</li>
+          <li>Herkent de proxy en blokkeert verdachte inlogpogingen</li>
+        </ul>
+      </div>
+      <dl class="spec">
+        <dt>Status</dt><dd><span class="status live">In gebruik</span></dd>
+        <dt>Techniek</dt><dd>Synology · DDNS · Let's Encrypt</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20 8 9h8l3 11"/><path d="M6.5 14.5h11M12 9v11"/><path d="M12 2v2M5.6 4.6l1.2 1.2M18.4 4.6l-1.2 1.2"/></svg>
+        </div>
+        <div>
+          <h3>Voorspelling zonne-opbrengst</h3>
+          <div class="platform">Home Assistant · energie</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Toont vooraf hoeveel stroom de zonnepanelen vandaag en morgen opleveren. Handig om grote verbruikers zoals de boiler op het juiste moment te laten draaien.</p>
+        <ul>
+          <li>Rekent met twee dakvlakken: het woonhuis en het tuinhuis</li>
+          <li>Te vergelijken met de echte opbrengst van de omvormer</li>
+        </ul>
+      </div>
+      <dl class="spec">
+        <dt>Status</dt><dd><span class="status live">In gebruik</span></dd>
+        <dt>Techniek</dt><dd>Home Assistant · GoodWe-omvormer</dd>
+      </dl>
+    </article>
   </div>
 </section>
 
