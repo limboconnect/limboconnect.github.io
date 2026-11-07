@@ -101,6 +101,9 @@ h2{font-family:var(--font-display);font-weight:700;font-size:26px;margin:0;text-
 .icon svg{width:24px;height:24px}
 h3{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.25;margin:2px 0 4px;text-wrap:balance}
 .platform{font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
+.shot{margin:16px 20px 0;background:var(--accent-soft);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.shot img{display:block;max-width:100%;height:auto;max-height:360px;border-radius:6px}
+.shot img.wide{max-height:none}
 .card-body{padding:12px 20px 16px;flex:1}
 .card-body p{margin:0 0 10px}
 .card-body ul{margin:0;padding-left:18px}
@@ -182,6 +185,7 @@ footer{padding:40px 0 56px}
           <div class="platform">Android-app</div>
         </div>
       </div>
+      <figure class="shot"><img src="img/rittenregistratie.webp" width="900" height="960" alt="Rittenregistratie in donkere weergave: startscherm en een lopende rit" loading="lazy"><img class="wide" src="img/rittenregistratie-widget.webp" width="1000" height="243" alt="Startscherm-widget om ritten te starten en te stoppen" loading="lazy"></figure>
       <div class="card-body">
         <p>Houdt de ritten van een bedrijfsbus bij voor de bijtelling, zonder papieren rittenboek.</p>
         <ul>
@@ -233,6 +237,7 @@ footer{padding:40px 0 56px}
           <div class="platform">Android-app + webversie</div>
         </div>
       </div>
+      <figure class="shot"><img src="img/storingsdienst.webp" width="520" height="1125" alt="Storingsdienstrooster: wie nu dienst heeft, wie hierna en deze week" loading="lazy"></figure>
       <div class="card-body">
         <p>Laat in één oogopslag zien wie er storingsdienst heeft. Voor een team dat 24/7 bereikbaar moet zijn en vaak binnen een uur ter plaatse is.</p>
         <ul>
@@ -258,6 +263,7 @@ footer{padding:40px 0 56px}
           <div class="platform">Webapp (PWA), installeerbaar op telefoon</div>
         </div>
       </div>
+      <figure class="shot"><img class="wide" src="img/kapsalon.webp" width="1100" height="768" alt="Weekoverzicht van de afsprakenplanner met drie kappers" loading="lazy"></figure>
       <div class="card-body">
         <p>Afspraken­systeem voor een herensalon met drie medewerkers. Klanten bellen, de medewerkers plannen de afspraak direct in.</p>
         <ul>
