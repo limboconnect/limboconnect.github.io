@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mijn Home Assistant</title>
+<meta name="description" content="Wat de Home Assistant-installatie van Ilja Lemmens allemaal doet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: werkbank-overzicht — intro, dan per categorie een raster van projectkaarten met een "specificatieblok" zoals op een datasheet */
+:root{
+  --bg:#f3f4f0;
+  --surface:#ffffff;
+  --ink:#16201b;
+  --muted:#5b6660;
+  --line:#d9ddd5;
+  --accent:#1d6b48;      /* printplaatgroen */
+  --signal:#c97d12;      /* signaal-amber */
+  --accent-soft:#e3efe7;
+  --font-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body:"IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111613; --surface:#18201b; --ink:#e7ece8; --muted:#9aa69f;
+    --line:#2a352f; --accent:#5cc28f; --signal:#f0a63c; --accent-soft:#1d2b23;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111613; --surface:#18201b; --ink:#e7ece8; --muted:#9aa69f;
+  --line:#2a352f; --accent:#5cc28f; --signal:#f0a63c; --accent-soft:#1d2b23;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.6;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:32px 32px;
+  background-attachment:fixed;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) body{background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);} }
+:root[data-theme="dark"] body{background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);}
+
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+header.intro{padding:56px 0 40px}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:13px;color:var(--muted);
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px;
+}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.02em;
+  margin:18px 0 14px;text-wrap:balance;
+}
+h1 span{color:var(--accent)}
+.lead{max-width:62ch;color:var(--muted);font-size:18px;margin:0}
+.lead strong{color:var(--ink);font-weight:600}
+
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.stat{
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:10px 16px;font-family:var(--font-mono);font-size:14px;color:var(--muted);
+}
+.stat b{display:block;font-family:var(--font-display);font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
+
+section{padding:28px 0 12px}
+.section-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:18px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+h2{font-family:var(--font-display);font-weight:700;font-size:26px;margin:0;text-wrap:balance}
+.section-head p{margin:0;color:var(--muted);font-size:15px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.card-top{display:flex;gap:14px;align-items:flex-start;padding:20px 20px 0}
+.icon{
+  flex:0 0 46px;height:46px;border-radius:10px;background:var(--accent-soft);
+  display:grid;place-items:center;color:var(--accent);
+}
+.icon svg{width:24px;height:24px}
+h3{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.25;margin:2px 0 4px;text-wrap:balance}
+.platform{font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
+.shot{margin:16px 20px 0;background:var(--accent-soft);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.shot img{display:block;max-width:100%;height:auto;max-height:360px;border-radius:6px}
+.shot img.wide{max-height:none}
+.card-body{padding:12px 20px 16px;flex:1}
+.card-body p{margin:0 0 10px}
+.card-body ul{margin:0;padding-left:18px}
+.card-body li{margin:2px 0}
+
+.spec{
+  border-top:1px dashed var(--line);
+  display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:4px;
+  padding:12px 20px 16px;margin:0;
+  font-family:var(--font-mono);font-size:13px;
+}
+.spec dt{color:var(--muted)}
+.spec dd{margin:0}
+
+.status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
+  padding:2px 9px;border-radius:999px;white-space:nowrap;
+}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.status.live{color:var(--accent);background:var(--accent-soft)}
+.status.exp{color:var(--signal);background:color-mix(in srgb,var(--signal) 14%,transparent)}
+
+footer{padding:40px 0 56px}
+.contact{
+  background:var(--ink);color:var(--bg);border-radius:14px;padding:28px;
+  display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;
+}
+.contact h2{color:var(--bg);font-size:24px}
+.contact p{margin:6px 0 0;opacity:.8;max-width:52ch}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:#fff;text-decoration:none;font-weight:600;
+  padding:12px 20px;border-radius:10px;
+}
+:root[data-theme="dark"] .btn{color:#0d1410}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .btn{color:#0d1410} }
+.btn svg{width:20px;height:20px}
+.small{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);margin-top:18px}
+
+@media (max-width:420px){
+  body{font-size:16px}
+  .grid{grid-template-columns:1fr}
+  .contact{padding:22px}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<style>
+.back{display:inline-flex;gap:6px;align-items:center;font-family:var(--font-mono);font-size:13px;text-decoration:none;margin-top:28px}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.feat h3{margin:0}
+.feat p{margin:0}
+.feat ul{margin:4px 0 0;padding-left:18px}
+.feat li{margin:2px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.tag{font-family:var(--font-mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 9px}
+.feat-head{display:flex;gap:12px;align-items:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">← Alle projecten</a>
+<header class="intro" style="padding-top:24px">
+  <span class="badge"><span class="dot"></span>Home Assistant OS · eigen hardware</span>
+  <h1>Mijn <span>Home Assistant</span></h1>
+  <p class="lead">Het hele huis op één systeem: verlichting, klimaat, beveiliging, energie en huishouden. Alles draait lokaal in huis en is <strong>voor iedereen in het gezin</strong> te bedienen vanaf de tablet in de keuken.</p>
+  <div class="stats">
+    <div class="stat"><b>1.000+</b>apparaten en sensoren</div>
+    <div class="stat"><b>18</b>ruimtes</div>
+    <div class="stat"><b>19</b>automatiseringen</div>
+    <div class="stat"><b>53</b>scènes</div>
+    <div class="stat"><b>13</b>camera's</div>
+  </div>
+</header>
+<section aria-labelledby="h-wat">
+  <div class="section-head"><h2 id="h-wat">Wat het allemaal doet</h2><p>Per onderdeel</p></div>
+  <div class="grid">
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div><h3>Dashboards per apparaat</h3></div>
+      <p>Elk scherm in huis heeft een eigen dashboard, afgestemd op wie het gebruikt.</p>
+      <ul><li>Keukentablet aan de muur voor het hele gezin: thuis, muziek, beveiliging, verbruik en het huis</li><li>Telefoon: alleen de knoppen die je onderweg nodig hebt</li><li>Desktop, energie en een kaart voor het overzicht</li><li>Eigen rustig donker thema</li></ul>
+      <div class="tags"><span class="tag">Lovelace</span><span class="tag">Mushroom</span><span class="tag">card-mod</span><span class="tag">Fully Kiosk</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/></svg></div><h3>Verlichting en scènes</h3></div>
+      <p>43 lampen en 53 scènes, binnen en buiten.</p>
+      <ul><li>Buitenverlichting voor tuin, oprit, voordeur, dakterras en overkapping gaat automatisch aan en uit</li><li>Sfeerscènes per ruimte, te kiezen met draadloze dimmers</li><li>Eén knop: alle lampen uit</li></ul>
+      <div class="tags"><span class="tag">Philips Hue</span><span class="tag">Zigbee</span><span class="tag">Automatiseringen</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0Z"/></svg></div><h3>Klimaat en screens</h3></div>
+      <p>Temperatuur en vocht per ruimte, met airco en zonwering op afstand.</p>
+      <ul><li>Drie airco's te bedienen vanaf tablet en telefoon</li><li>Vijf screens en rolluiken</li><li>Temperatuur en luchtvochtigheid per ruimte, met kleur als het te warm of te vochtig wordt</li><li>Grafiek van de temperatuur over 24 uur</li></ul>
+      <div class="tags"><span class="tag">Sonoff Zigbee-sensoren</span><span class="tag">Airco-integratie</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></div><h3>Slimme deurbel</h3></div>
+      <p>Aanbellen zet de keukentablet aan met groot livebeeld van de voordeur.</p>
+      <ul><li>Foto van de bezoeker als Telegram-bericht</li><li>Stand "Nachtdienst": overdag stil in huis, alleen een melding</li><li>Na 20 seconden terug naar het startscherm</li></ul>
+      <div class="tags"><span class="tag">Reolink</span><span class="tag">Telegram</span><span class="tag">Fully Kiosk</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h12v10H3z"/><path d="m15 11 6-3v8l-6-3"/></svg></div><h3>Camera's en toegang</h3></div>
+      <p>Overzicht van alle camera's en deuren in één weergave.</p>
+      <ul><li>13 camerabeelden op de tablet</li><li>Deurcontacten op voordeur, tuindeur, kelder en trappenhuis met eigen automatisering</li><li>Melding als het gaat regenen terwijl er een raam of deur open staat</li><li>Melding bij een mogelijk waterlek</li></ul>
+      <div class="tags"><span class="tag">Dahua</span><span class="tag">Reolink</span><span class="tag">Zigbee-deurcontacten</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div><h3>Energie, gas en water</h3></div>
+      <p>Live verbruik en de kosten van vandaag, voor stroom, gas en water.</p>
+      <ul><li>Stroomafname en teruglevering live, met kosten per uur</li><li>Gas- en waterverbruik per uur met dagkosten</li><li>Zonnepanelen op twee dakvlakken met een voorspelling van de opbrengst</li><li>Boiler warmt op met zonne-overschot</li><li>Simulatie van een thuisbatterij op het echte verbruik</li></ul>
+      <div class="tags"><span class="tag">P1-meter</span><span class="tag">GoodWe</span><span class="tag">Watermeter</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></div><h3>Huishouden</h3></div>
+      <p>Apparaten melden zelf hoe ver ze zijn.</p>
+      <ul><li>Status van vaatwasser, wasmachine en droger op de tablet</li><li>Afvalkalender: wat er morgen wordt opgehaald</li><li>Gezinsagenda op het startscherm</li><li>Robotstofzuiger en robotmaaier</li></ul>
+      <div class="tags"><span class="tag">Roborock</span><span class="tag">Afvalinfo</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="3"/><circle cx="18" cy="15" r="3"/><path d="M10 17V5l11-2v12"/></svg></div><h3>Muziek in elke kamer</h3></div>
+      <p>Multiroom-audio met één bediening voor alle speakers.</p>
+      <ul><li>Sonos in woonkamer, eetkamer, badkamer en slaapkamers</li><li>Eén muziekspeler op de tablet voor het hele huis</li><li>Wat er nu speelt verschijnt vanzelf op het startscherm</li></ul>
+      <div class="tags"><span class="tag">Sonos</span><span class="tag">Music Assistant</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></div><h3>Spraak</h3></div>
+      <p>Home Assistant bedienen en laten praten.</p>
+      <ul><li>Lokale spraakherkenning en spraak, zonder cloud</li><li>Optioneel een AI-assistent voor vrije vragen</li><li>Gesproken meldingen via de keukentablet</li></ul>
+      <div class="tags"><span class="tag">Whisper</span><span class="tag">Piper</span><span class="tag">Assist</span></div>
+    </article>
+    <article class="feat">
+      <div class="feat-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 9.3 9 10 5.2-.7 9-5 9-10V6l-9-4Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Beheer en veiligheid</h3></div>
+      <p>Zo blijft het systeem snel, veilig en hersteld als het misgaat.</p>
+      <ul><li>Veilige toegang van buitenaf via reverse proxy en HTTPS</li><li>Melding zodra een IP-adres wordt geblokkeerd</li><li>Database wordt automatisch opgeschoond</li><li>Automatische back-ups</li></ul>
+      <div class="tags"><span class="tag">Synology</span><span class="tag">Let's Encrypt</span><span class="tag">HA OS</span></div>
+    </article>
+  </div>
+</section>
+<footer>
+  <p class="small"><a href="index.html">← Terug naar alle projecten</a> · © 2026 Ilja Lemmens</p>
+</footer>
+</div>
+</body>
+</html>
