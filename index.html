@@ -70,6 +70,18 @@ html{scroll-behavior:smooth}
 .tl span{font-family:var(--fm);font-size:13px;color:var(--muted);font-weight:400;padding-top:2px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{background:var(--card2);border-radius:999px;padding:5px 12px;font-size:14px}
 @media(max-width:820px){.over{grid-template-columns:1fr}}
+.ha-b{background:var(--card);border-radius:22px;padding:22px;overflow:hidden}
+.ha-b h3{margin:0 0 6px;font-size:26px;font-weight:800}.ha-b-intro{margin:0 0 16px;color:#cfd4da;max-width:65ch}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.sfig{flex:0 0 46%;scroll-snap-align:start;background:var(--card2);border-radius:14px;padding:10px;text-decoration:none;color:var(--muted);border:1px solid transparent;transition:border-color .15s}
+.sfig:hover{border-color:var(--amber)}
+.sfig img{width:100%;height:240px;object-fit:cover;object-position:top;border-radius:8px;display:block}
+.sfig span{display:block;font-size:14px;padding:8px 2px 0}.sfig b{color:var(--ink)}
+.strip-nav{display:flex;justify-content:space-between;align-items:center;margin:10px 0 16px;color:var(--muted);font-size:14px}
+.dots{display:flex;gap:6px}.dots span{width:8px;height:8px;border-radius:50%;background:var(--line);transition:width .2s}.dots span.on{background:var(--amber);width:22px;border-radius:4px}
+.ha-b .btn2{text-decoration:none}
+@media(max-width:820px){.sfig{flex-basis:85%}.sfig img{height:200px}}
 </style></head><body><div class="wrap"><div class="top"><div class="logo"><i>IL</i>Ilja Lemmens</div></div>
 <header class="hero"><div><h1>Zelfgebouwde apps en een <em>slim huis</em></h1><p class="lead">Technicus met een achtergrond in energietechniek, gespecialiseerd in netwerken en telematica. Met een hart voor domotica en camerasystemen bouw ik apps en automatiseringen die een praktisch probleem oplossen, op het werk en thuis.</p></div>
 <div class="badges"><div class="bdg"><i>5</i><div><b>Apps</b><span>in gebruik</span></div></div><div class="bdg"><i>6</i><div><b>Home Assistant</b><span>projecten</span></div></div><div class="bdg"><i>24/7</i><div><b>Lokaal</b><span>in eigen huis</span></div></div></div></header>
@@ -106,23 +118,13 @@ html{scroll-behavior:smooth}
   </div>
 </div></section>
 <section class="sec" id="apps"><div class="sec-h"><h2>Apps</h2><p>Android, web en PWA</p></div><div class="apps"><article class="app"><div class="shot"><img class="" src="img/rittenregistratie.webp" alt="Screenshot Rittenregistratie" loading="lazy"><img class=" wide" src="img/rittenregistratie-widget.webp" alt="Screenshot Rittenregistratie" loading="lazy"></div><div class="body"><h3>Rittenregistratie</h3><div class="pf">Android-app</div><p>Houdt de ritten van een bedrijfsbus bij voor de bijtelling, zonder papieren rittenboek.</p><ul><li>Rit starten en stoppen met GPS, adressen automatisch ingevuld</li><li>Widget op het startscherm, ook voor de storingsdienst</li><li>Hectometerpaal opzoeken bij storingen langs de weg</li><li>Overzicht zakelijk/privé, export naar PDF en CSV</li></ul><div class="foot"><span class="st">In gebruik, ook door collega&#x27;s</span><span>Android · GPS · lokale opslag</span></div></div></article><article class="app"><div class="shot"><img class="" src="img/teamplanning.webp" alt="Screenshot Teamplanning" loading="lazy"></div><div class="body"><h3>Teamplanning</h3><div class="pf">Android-app + webversie</div><p>Maakt een grote Excel-planning van een technisch team leesbaar op de telefoon.</p><ul><li>Planningsbestand openen via Delen of Openen met</li><li>Toont de complete planning, niet alleen de diensten</li><li>Zoeken in de planning en een overzicht van wijzigingen</li><li>Webversie voor gebruik op de laptop</li></ul><div class="foot"><span class="st">In gebruik</span><span>Android · Cloudflare Workers</span></div></div></article><article class="app"><div class="shot"><img class="" src="img/storingsdienst.webp" alt="Screenshot Storingsdienstrooster" loading="lazy"></div><div class="body"><h3>Storingsdienstrooster</h3><div class="pf">Android-app + webversie</div><p>Laat in één oogopslag zien wie er storingsdienst heeft, voor een team dat 24/7 bereikbaar is.</p><ul><li>Rooster live uit de gedeelde teamagenda</li><li>Dienstweken van overdracht tot overdracht, met weeknummer</li><li>Webversie voor wie geen Android heeft</li></ul><div class="foot"><span class="st">In gebruik, ook door collega&#x27;s</span><span>Android · iCal · Cloudflare Workers</span></div></div></article><article class="app"><div class="shot"><img class=" wide" src="img/kapsalon.webp" alt="Screenshot Afsprakenplanner kapsalon" loading="lazy"></div><div class="body"><h3>Afsprakenplanner kapsalon</h3><div class="pf">Webapp (PWA)</div><p>Afsprakensysteem voor een herensalon met drie medewerkers. Klanten bellen, de kappers plannen direct in.</p><ul><li>Iedereen kan bij iedereen plannen, in blokken van 15 minuten</li><li>Weekoverzicht met weeknummers</li><li>Afspraken verslepen naar een ander tijdstip</li><li>Ontwerp in de huisstijl van de salon</li></ul><div class="foot"><span class="st">In gebruik</span><span>PWA · Supabase · back-up op NAS</span></div></div></article><article class="app"><div class="shot"><img class="" src="img/kennisbank-prikbord.webp" alt="Screenshot Kennisbank: prikbord met objecten dichtbij" loading="lazy"><img class="" src="img/kennisbank-melding.webp" alt="Screenshot Kennisbank: herkende melding met SLA-teller" loading="lazy"></div><div class="body"><h3>Kennisbank storingsdienst</h3><div class="pf">Webapp (PWA) voor Android, iPhone en pc</div><p>Een digitaal post-it-bord voor een storingsdienst-team. Per locatie staat vast hoe je binnenkomt en hoe eerdere storingen zijn opgelost.</p><ul><li>Prikbord met de locaties het dichtst bij jou bovenaan</li><li>Storingsmail plakken: de app herkent de locatie en toont de toegang, de SLA-teller en eerdere oplossingen</li><li>Afgesloten werkbonnen in één keer importeren</li><li>Filtert automatisch gevoelige gegevens weg, zoals IP-adressen en serienummers</li><li>Alleen toegankelijk voor uitgenodigde collega's</li></ul><div class="foot"><span class="st x">Nieuw</span><span>PWA · Supabase · GitHub Pages</span></div></div></article></div></section><section class="sec" id="ha"><div class="sec-h"><h2>Home Assistant</h2><p>Automatisering in en rond mijn eigen huis</p></div>
-<a class="hab" href="ha.html">
-  <img class="hab-img" src="img/ha-home.webp" width="1100" height="590" alt="Startscherm van de Home Assistant-tablet">
-  <div class="hab-l">
-    <h3>Mijn Home Assistant</h3>
-    <p>Het hele huis op één systeem: verlichting, klimaat, beveiliging, energie en huishouden. Alles draait lokaal in huis en is voor iedereen in het gezin te bedienen vanaf de tablet of telefoon.</p>
-    <div class="hab-stats"><span><b>1.000+</b> apparaten</span><span><b>18</b> ruimtes</span><span><b>19</b> automatiseringen</span><span><b>13</b> camera's</span><span><b>6</b> projecten</span></div>
-    <span class="btn2">Bekijk alles wat het doet →</span>
-  </div>
-  <ul class="hab-r">
-    <li>Slimme deurbel met livebeeld op de tablet</li>
-    <li>Boiler op zonnestroom</li>
-    <li>Thuisbatterij-simulatie</li>
-    <li>Dashboards voor het hele gezin</li>
-    <li>Veilige toegang van buitenaf</li>
-    <li>Voorspelling zonne-opbrengst</li>
-  </ul>
-</a></section><section class="sec" id="domoticz"><div class="sec-h"><h2>Energiemonitoring</h2><p>Data sinds 2012</p></div>
+<div class="ha-b">
+  <h3>Mijn Home Assistant</h3>
+  <p class="ha-b-intro">Het hele huis op één systeem: verlichting, klimaat, beveiliging, energie en huishouden. Alles draait lokaal in huis en is voor iedereen in het gezin te bedienen vanaf de tablet of telefoon.</p>
+  <div class="strip" id="ha-strip"><a class="sfig" href="ha.html"><img src="img/ha-home.webp" alt="Startscherm tablet" loading="lazy"><span><b>Startscherm tablet</b></span></a><a class="sfig" href="ha.html"><img src="img/ha-stats.webp" alt="Verbruik" loading="lazy"><span><b>Verbruik</b></span></a><a class="sfig" href="ha.html"><img src="img/ha-huis.webp" alt="Binnenklimaat" loading="lazy"><span><b>Binnenklimaat</b></span></a><a class="sfig" href="ha.html"><img src="img/ha-energie.webp" alt="Energie" loading="lazy"><span><b>Energie</b></span></a><a class="sfig" href="ha.html"><img src="img/ha-muziek.webp" alt="Muziek" loading="lazy"><span><b>Muziek</b></span></a><a class="sfig" href="ha.html"><img src="img/ha-energiestroom.webp" alt="Energiestroom" loading="lazy"><span><b>Energiestroom</b></span></a></div>
+  <div class="strip-nav"><div class="dots" id="ha-dots"><span class=on></span><span></span><span></span><span></span><span></span><span></span></div><span>Veeg voor meer →</span></div>
+  <a class="btn2" href="ha.html">Bekijk alle 8 onderdelen →</a>
+</div></section><section class="sec" id="domoticz"><div class="sec-h"><h2>Energiemonitoring</h2><p>Data sinds 2012</p></div>
 <div class="hab">
   <img class="hab-img" src="img/domoticz.webp" width="1302" height="320" alt="Domoticz-dashboard met stroom, gas, water en zonnepanelen" loading="lazy">
   <div class="hab-l">
@@ -186,5 +188,10 @@ const set=id=>{links.forEach(a=>a.classList.toggle('on',a.dataset.tab===id));con
 const secs=[...map.keys()].map(id=>document.getElementById(id)).filter(Boolean);
 if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)set(e.target.id);});},{rootMargin:'-40% 0px -55% 0px'});secs.forEach(x=>io.observe(x));}
 set('over');})();
+</script>
+<script>
+(()=>{const st=document.getElementById('ha-strip'),ds=[...document.querySelectorAll('#ha-dots span')];if(!st)return;
+st.addEventListener('scroll',()=>{const f=[...st.children];let best=0,bd=1e9;f.forEach((el,i)=>{const d=Math.abs(el.offsetLeft-st.scrollLeft);if(d<bd){bd=d;best=i;}});
+if(st.scrollLeft+st.clientWidth>=st.scrollWidth-4)best=f.length-1;ds.forEach((d,i)=>d.classList.toggle('on',i===best));},{passive:true});})();
 </script>
 </body></html>
